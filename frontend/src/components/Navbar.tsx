@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Wind, 
   Clock, 
@@ -8,8 +8,8 @@ import {
   TrendingUp, 
   History, 
   ShieldAlert, 
-  Info,
-  CheckCircle2
+  Maximize2,
+  Minimize2
 } from 'lucide-react';
 import { MatchingMode } from '../types';
 
@@ -36,6 +36,24 @@ export const Navbar: React.FC<NavbarProps> = ({
   setMatchingMode,
   availableDates
 }) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  };
+
   const tabs = [
     { id: 'overview', label: 'Executive Overview', icon: Activity },
     { id: 'forecast', label: 'Forecast vs Actual', icon: TrendingUp },
@@ -46,8 +64,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="bg-[#080E1E] border-b border-slate-800 text-slate-100 sticky top-0 z-40 shadow-xl">
-      {/* Top Branding & Global Controls Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Top Branding & Global Controls Bar (Fluid Full Width) */}
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3 gap-4">
           
           {/* Brand & Market Identity */}
@@ -72,7 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* Global Decision Filters */}
+          {/* Global Decision Filters & Fullscreen Action */}
           <div className="flex flex-wrap items-center gap-3 text-xs">
             {/* Delivery Date Picker */}
             <div className="flex items-center bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1.5 shadow-inner">
@@ -136,6 +154,26 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Exact (:00 Only)
               </button>
             </div>
+
+            {/* Fullscreen Toggle Button */}
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg shadow-inner font-medium transition-colors cursor-pointer"
+              title={isFullscreen ? "Exit Fullscreen" : "Full Screen Cockpit Mode"}
+            >
+              {isFullscreen ? (
+                <>
+                  <Minimize2 className="w-3.5 h-3.5 text-sky-400" />
+                  <span className="hidden sm:inline">Exit Fullscreen</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="w-3.5 h-3.5 text-sky-400" />
+                  <span className="hidden sm:inline">Full Screen</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
 

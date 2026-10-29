@@ -189,7 +189,7 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
             <span className="text-xs font-mono text-slate-400">31 Evaluated Days</span>
           </div>
 
-          <div className="h-72 w-full">
+          <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart
                 data={monthData.daily_breakdown.map((d) => ({
@@ -241,7 +241,7 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
             </span>
           </div>
 
-          <div className="h-64 w-full">
+          <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={monthData.error_distribution}

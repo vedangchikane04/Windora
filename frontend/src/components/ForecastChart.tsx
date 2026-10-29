@@ -180,8 +180,8 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
         </div>
       </div>
 
-      {/* Main Chart Canvas */}
-      <div className="h-[360px] sm:h-[420px] w-full">
+      {/* Main Chart Canvas (Expansive Full Screen) */}
+      <div className="h-[380px] sm:h-[460px] lg:h-[500px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
             data={chartData}
