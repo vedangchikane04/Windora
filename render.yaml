@@ -2,7 +2,7 @@ services:
   # Backend API
   - type: web
     name: windora-backend
-    env: python
+    runtime: python
     region: frankfurt
     plan: free
     rootDir: backend
@@ -20,8 +20,7 @@ services:
   # Frontend Static Site
   - type: web
     name: windora-frontend
-    env: static
-    plan: free
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
