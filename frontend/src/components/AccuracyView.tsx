@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   AccuracyResponse, 
   AccuracyMetrics, 
-  DailyAccuracyItem, 
   MatchingMode 
 } from '../types';
 import { api } from '../services/api';
@@ -22,13 +21,7 @@ import {
 } from 'recharts';
 import { 
   Layers, 
-  Calendar, 
-  Info, 
-  AlertTriangle, 
-  TrendingUp, 
-  TrendingDown, 
-  CheckCircle,
-  ExternalLink
+  Info
 } from 'lucide-react';
 
 interface AccuracyViewProps {
@@ -70,35 +63,35 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Scope Selector Header */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 sm:p-5 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border border-[#d8e8f2] rounded-xl p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center space-x-2">
-            <Layers className="w-5 h-5 text-sky-400" />
-            <h2 className="text-lg font-bold text-white">Forecast Accuracy & Error Quantisation</h2>
+            <Layers className="w-5 h-5 text-[#259ed9]" />
+            <h2 className="text-lg font-bold text-[#253949]">Forecast Accuracy & Error Quantisation</h2>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#4a6375] mt-1">
             Statistical performance evaluation of day-ahead wind generation forecasts using verified Elexon outturn data.
           </p>
         </div>
 
         {/* Day vs Month Toggle */}
-        <div className="flex items-center bg-slate-950 border border-slate-800 rounded-xl p-1 text-xs">
+        <div className="flex items-center bg-[#ebf5fa] border border-[#d8e8f2] rounded-xl p-1 text-xs">
           <button
             onClick={() => setScope('day')}
-            className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
               scope === 'day'
-                ? 'bg-sky-600 text-white shadow-md'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-[#259ed9] text-white shadow-xs font-semibold'
+                : 'text-[#4a6375] hover:text-[#259ed9]'
             }`}
           >
             Day ({selectedDate.substring(5)})
           </button>
           <button
             onClick={() => setScope('month')}
-            className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
               scope === 'month'
-                ? 'bg-sky-600 text-white shadow-md'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-[#259ed9] text-white shadow-xs font-semibold'
+                : 'text-[#4a6375] hover:text-[#259ed9]'
             }`}
           >
             Full January 2026 (Month)
@@ -162,12 +155,12 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
       </div>
 
       {/* Analytical Methodology Note on MAPE & Denominator Limitations */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 text-xs text-slate-300">
+      <div className="bg-[#c3e4f3]/25 border border-[#91cfec] rounded-xl p-4 text-xs text-[#253949]">
         <div className="flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-sky-400 mt-0.5 shrink-0" />
+          <Info className="w-4 h-4 text-[#259ed9] mt-0.5 shrink-0" />
           <div className="space-y-1">
-            <span className="font-semibold text-white">Methodological Disclosure: MAPE Limitations in Wind Analytics</span>
-            <p className="text-slate-400 leading-relaxed text-[11px]">
+            <span className="font-semibold text-[#253949]">Methodological Disclosure: MAPE Limitations in Wind Analytics</span>
+            <p className="text-[#4a6375] leading-relaxed text-[11px]">
               {activeMetrics.mape_explanation}
             </p>
           </div>
@@ -176,17 +169,17 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
 
       {/* Monthly Daily Breakdown Chart (when available) */}
       {monthData && (
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-xl space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+        <div className="bg-white border border-[#d8e8f2] rounded-xl p-5 shadow-xs space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#edf4f8]">
             <div>
-              <h3 className="text-sm font-semibold text-white">
+              <h3 className="text-sm font-semibold text-[#253949]">
                 Daily Forecast Accuracy & Bias Trend across January 2026
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[#4a6375]">
                 Daily MAE (bar) and Mean Error / Bias (line) for each day of the month.
               </p>
             </div>
-            <span className="text-xs font-mono text-slate-400">31 Evaluated Days</span>
+            <span className="text-xs font-mono text-[#4a6375]">31 Evaluated Days</span>
           </div>
 
           <div className="h-80 w-full">
@@ -199,24 +192,24 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
                 }))}
                 margin={{ top: 10, right: 15, left: -10, bottom: 0 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" vertical={false} />
-                <XAxis dataKey="dayNum" stroke="#64748B" fontSize={11} tickLine={false} />
-                <YAxis stroke="#64748B" fontSize={11} tickLine={false} unit=" MW" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#edf4f8" vertical={false} />
+                <XAxis dataKey="dayNum" stroke="#91cfec" fontSize={11} tickLine={false} />
+                <YAxis stroke="#91cfec" fontSize={11} tickLine={false} unit=" MW" />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#020617', borderColor: '#334155', borderRadius: '8px', fontSize: '11px' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#c3e4f3', borderRadius: '8px', fontSize: '11px', color: '#253949' }}
                   formatter={(val: any, name: any) => [`${val.toLocaleString()} MW`, name]}
                   labelFormatter={(lbl) => `2026-01-${lbl}`}
                 />
-                <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: '11px', paddingBottom: '8px' }} />
-                <ReferenceLine y={0} stroke="#64748B" strokeWidth={1} />
-                <Bar name="Daily MAE (MW)" dataKey="mae_mw" fill="#38BDF8" opacity={0.6} radius={[2, 2, 0, 0]} />
+                <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: '11px', paddingBottom: '8px', color: '#4a6375' }} />
+                <ReferenceLine y={0} stroke="#d8e8f2" strokeWidth={1} />
+                <Bar name="Daily MAE (MW)" dataKey="mae_mw" fill="#91cfec" opacity={0.8} radius={[2, 2, 0, 0]} />
                 <Line
                   type="monotone"
                   name="Mean Error / Bias (MW)"
                   dataKey="mean_error_mw"
-                  stroke="#F59E0B"
-                  strokeWidth={2}
-                  dot={{ r: 2 }}
+                  stroke="#259ed9"
+                  strokeWidth={2.5}
+                  dot={{ r: 2.5, fill: '#259ed9' }}
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -226,17 +219,17 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
 
       {/* Error Distribution Histogram */}
       {monthData && monthData.error_distribution.length > 0 && (
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-xl space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="bg-white border border-[#d8e8f2] rounded-xl p-5 shadow-xs space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#edf4f8]">
             <div>
-              <h3 className="text-sm font-semibold text-white">
+              <h3 className="text-sm font-semibold text-[#253949]">
                 Forecast Error Distribution Across All January 2026 Intervals
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[#4a6375]">
                 Frequency histogram of forecast errors (Forecast - Actual, MW).
               </p>
             </div>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-mono text-[#4a6375]">
               {monthData.aggregate_metrics.sample_count} Total Intervals
             </span>
           </div>
@@ -247,19 +240,19 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
                 data={monthData.error_distribution}
                 margin={{ top: 10, right: 15, left: -10, bottom: 25 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#edf4f8" vertical={false} />
                 <XAxis
                   dataKey="bucket_label"
-                  stroke="#64748B"
+                  stroke="#91cfec"
                   fontSize={9}
                   tickLine={false}
                   interval={0}
                   angle={-15}
                   textAnchor="end"
                 />
-                <YAxis stroke="#64748B" fontSize={11} tickLine={false} unit=" ints" />
+                <YAxis stroke="#91cfec" fontSize={11} tickLine={false} unit=" ints" />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#020617', borderColor: '#334155', borderRadius: '8px', fontSize: '11px' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#c3e4f3', borderRadius: '8px', fontSize: '11px', color: '#253949' }}
                   formatter={(val: any, name: any, item: any) => [
                     `${val} intervals (${item.payload.percentage}%)`,
                     'Frequency'
@@ -268,7 +261,7 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
                 <Bar
                   dataKey="count"
                   name="Intervals"
-                  fill="#10B981"
+                  fill="#259ed9"
                   radius={[3, 3, 0, 0]}
                 />
               </BarChart>
@@ -279,15 +272,15 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
 
       {/* Daily Breakdown Table */}
       {monthData && (
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl overflow-hidden shadow-xl">
-          <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-white">Daily Metrics Summary Table</h3>
-            <span className="text-xs text-slate-400">Click a day to focus view</span>
+        <div className="bg-white border border-[#d8e8f2] rounded-xl overflow-hidden shadow-xs">
+          <div className="p-4 border-b border-[#edf4f8] flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-[#253949]">Daily Metrics Summary Table</h3>
+            <span className="text-xs text-[#4a6375]">Click a day to focus view</span>
           </div>
 
           <div className="overflow-x-auto max-h-96">
-            <table className="w-full text-left text-xs text-slate-300">
-              <thead className="bg-slate-950 text-slate-400 border-b border-slate-800 text-[11px] font-mono sticky top-0">
+            <table className="w-full text-left text-xs text-[#253949]">
+              <thead className="bg-[#f8fafc] text-[#4a6375] border-b border-[#d8e8f2] text-[11px] font-mono sticky top-0">
                 <tr>
                   <th className="py-2.5 px-3">Date</th>
                   <th className="py-2.5 px-3">MAE (MW)</th>
@@ -299,31 +292,31 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
                   <th className="py-2.5 px-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80 font-mono">
+              <tbody className="divide-y divide-[#edf4f8] font-mono">
                 {monthData.daily_breakdown.map((row) => {
                   const isSelected = row.date === selectedDate;
                   return (
                     <tr
                       key={row.date}
-                      className={`hover:bg-slate-800/40 transition-colors ${
-                        isSelected ? 'bg-sky-950/40 border-l-4 border-l-sky-400' : ''
+                      className={`hover:bg-[#ebf5fa]/60 transition-colors ${
+                        isSelected ? 'bg-[#c3e4f3]/25 border-l-4 border-l-[#259ed9]' : ''
                       }`}
                     >
-                      <td className="py-2 px-3 font-semibold text-white">{row.date}</td>
-                      <td className="py-2 px-3 text-sky-400 font-bold">{row.mae_mw.toLocaleString()}</td>
-                      <td className="py-2 px-3 text-slate-300">{row.rmse_mw.toLocaleString()}</td>
+                      <td className="py-2 px-3 font-semibold text-[#253949]">{row.date}</td>
+                      <td className="py-2 px-3 text-[#259ed9] font-bold">{row.mae_mw.toLocaleString()}</td>
+                      <td className="py-2 px-3 text-[#4a6375]">{row.rmse_mw.toLocaleString()}</td>
                       <td className="py-2 px-3">
-                        <span className={row.mean_error_mw > 0 ? 'text-amber-400' : 'text-emerald-400'}>
+                        <span className={row.mean_error_mw > 0 ? 'text-[#c2410c] font-bold' : 'text-[#259ed9] font-bold'}>
                           {row.mean_error_mw > 0 ? '+' : ''}{row.mean_error_mw.toLocaleString()}
                         </span>
                       </td>
-                      <td className="py-2 px-3 text-emerald-400">{row.actual_avg_mw.toLocaleString()}</td>
-                      <td className="py-2 px-3 text-sky-400">{row.forecast_avg_mw.toLocaleString()}</td>
-                      <td className="py-2 px-3 text-[11px] text-slate-400">{row.procurement_bias}</td>
+                      <td className="py-2 px-3 text-[#253949]">{row.actual_avg_mw.toLocaleString()}</td>
+                      <td className="py-2 px-3 text-[#259ed9] font-bold">{row.forecast_avg_mw.toLocaleString()}</td>
+                      <td className="py-2 px-3 text-[11px] text-[#4a6375]">{row.procurement_bias}</td>
                       <td className="py-2 px-3 text-right">
                         <button
                           onClick={() => onSelectDate(row.date)}
-                          className="px-2 py-1 rounded bg-slate-800 hover:bg-sky-700 text-sky-300 hover:text-white text-[10px] font-semibold transition-colors"
+                          className="px-2 py-1 rounded bg-[#c3e4f3]/30 border border-[#91cfec] hover:bg-[#259ed9] text-[#259ed9] hover:text-white text-[10px] font-semibold transition-colors cursor-pointer"
                         >
                           Select Day
                         </button>
@@ -339,3 +332,4 @@ export const AccuracyView: React.FC<AccuracyViewProps> = ({
     </div>
   );
 };
+export default AccuracyView;

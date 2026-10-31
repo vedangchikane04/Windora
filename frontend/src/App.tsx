@@ -80,7 +80,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#080E1E] text-slate-100 flex flex-col font-sans selection:bg-sky-500 selection:text-white">
+    <div className="min-h-screen bg-[#f6fafc] text-[#253949] flex flex-col font-sans selection:bg-[#91cfec]/40 selection:text-[#253949]">
       {/* Header Navigation */}
       <Navbar
         currentTab={currentTab}
@@ -99,30 +99,30 @@ export const App: React.FC = () => {
         {loading && !overview ? (
           <div className="py-32 flex flex-col items-center justify-center text-center">
             <div className="relative">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-sky-600 via-teal-500 to-emerald-400 animate-spin flex items-center justify-center p-0.5 shadow-xl shadow-sky-500/20">
-                <div className="w-full h-full bg-[#080E1E] rounded-2xl flex items-center justify-center">
-                  <Wind className="w-7 h-7 text-sky-400" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#253949] via-[#259ed9] to-[#91cfec] animate-spin flex items-center justify-center p-0.5 shadow-xl shadow-[#259ed9]/25">
+                <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center">
+                  <Wind className="w-7 h-7 text-[#259ed9]" />
                 </div>
               </div>
             </div>
-            <h3 className="text-base font-bold text-white mt-4 font-mono tracking-wide">
+            <h3 className="text-base font-bold text-[#253949] mt-4 font-mono tracking-wide">
               Loading Windora Intelligence...
             </h3>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm">
+            <p className="text-xs text-[#4a6375] mt-1 max-w-sm">
               Processing UK National Grid Elexon outturn and day-ahead forecast streams for {selectedDate}.
             </p>
           </div>
         ) : error ? (
-          <div className="p-8 max-w-xl mx-auto my-12 bg-rose-950/40 border border-rose-800 rounded-2xl text-center shadow-2xl">
-            <AlertCircle className="w-12 h-12 text-rose-400 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-rose-300">Connection or Processing Error</h3>
-            <p className="text-xs text-rose-200/90 mt-2 leading-relaxed">
+          <div className="p-8 max-w-xl mx-auto my-12 bg-[#ff9b83]/15 border border-[#ff9b83]/50 rounded-2xl text-center shadow-lg">
+            <AlertCircle className="w-12 h-12 text-[#ea580c] mx-auto mb-3" />
+            <h3 className="text-base font-bold text-[#9a3412]">Connection or Processing Error</h3>
+            <p className="text-xs text-[#c2410c] mt-2 leading-relaxed">
               {error}
             </p>
             <div className="mt-5 flex items-center justify-center gap-3">
               <button
                 onClick={loadData}
-                className="px-4 py-2 rounded-lg bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold flex items-center gap-2 shadow-lg transition-colors"
+                className="px-4 py-2 rounded-lg bg-[#259ed9] hover:bg-[#1d82b4] text-white text-xs font-semibold flex items-center gap-2 shadow-md transition-colors cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
                 Retry Connection
@@ -199,20 +199,20 @@ export const App: React.FC = () => {
       )}
 
       {/* Footer (Fluid Full Screen) */}
-      <footer className="border-t border-slate-800/80 bg-slate-950/90 py-5 text-xs text-slate-500 mt-12">
+      <footer className="border-t border-[#d8e8f2] bg-white py-5 text-xs text-[#4a6375] mt-12 shadow-xs">
         <div className="w-full px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
           <div className="flex items-center space-x-2">
-            <span className="font-bold text-slate-300">WINDORA MVP</span>
+            <span className="font-bold text-[#259ed9]">WINDORA MVP</span>
             <span>•</span>
-            <span>UK Electricity Day-Ahead Wind Intelligence</span>
+            <span className="text-[#253949]">UK Electricity Day-Ahead Wind Intelligence</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-[11px]">
-            <span className="text-slate-400">
-              Data: Elexon BMRS (<a href="https://bmrs.elexon.co.uk" target="_blank" rel="noreferrer" className="text-sky-400 hover:underline">FUELHH</a> &amp; <a href="https://bmrs.elexon.co.uk" target="_blank" rel="noreferrer" className="text-sky-400 hover:underline">WINDFOR</a>)
+            <span className="text-[#4a6375]">
+              Data: Elexon BMRS (<a href="https://bmrs.elexon.co.uk" target="_blank" rel="noreferrer" className="text-[#259ed9] font-semibold hover:underline">FUELHH</a> &amp; <a href="https://bmrs.elexon.co.uk" target="_blank" rel="noreferrer" className="text-[#259ed9] font-semibold hover:underline">WINDFOR</a>)
             </span>
-            <span className="text-slate-600">|</span>
-            <a href="/docs" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white flex items-center gap-1">
+            <span className="text-[#d8e8f2]">|</span>
+            <a href="/docs" target="_blank" rel="noreferrer" className="text-[#259ed9] font-medium hover:underline flex items-center gap-1 transition-colors">
               <span>FastAPI Docs</span>
               <ExternalLink className="w-3 h-3" />
             </a>

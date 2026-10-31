@@ -21,6 +21,11 @@ ENV/
 .env.local
 .env.*.local
 
+# Databases & local caches
+*.db
+*.sqlite
+*.sqlite3
+
 # Logs
 *.log
 npm-debug.log*

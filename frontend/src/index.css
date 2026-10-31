@@ -1,41 +1,66 @@
 @import "tailwindcss";
 
+@theme {
+  --color-palette-1: #259ed9;
+  --color-palette-2: #253949;
+  --color-palette-3: #c3e4f3;
+  --color-palette-4: #91cfec;
+  --color-palette-5: #ff9b83;
+
+  --color-windora-azure: #259ed9;
+  --color-windora-navy: #253949;
+  --color-windora-ice: #c3e4f3;
+  --color-windora-sky: #91cfec;
+  --color-windora-coral: #ff9b83;
+
+  --color-surface-canvas: #f6fafc;
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #ebf5fa;
+  --color-border-subtle: #d8e8f2;
+}
+
 @layer base {
   :root {
-    --navy-950: #080E1E;
-    --navy-900: #0B132B;
-    --navy-800: #1C2541;
-    --navy-700: #3A506B;
-    --wind-teal: #0EA5E9;
-    --wind-emerald: #10B981;
-    --wind-amber: #F59E0B;
-    --wind-crimson: #EF4444;
+    --palette-1: #259ed9;
+    --palette-2: #253949;
+    --palette-3: #c3e4f3;
+    --palette-4: #91cfec;
+    --palette-5: #ff9b83;
+
+    --bg-canvas: #f6fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #ebf5fa;
+    --border-subtle: #d8e8f2;
+    --border-accent: #91cfec;
+    --text-primary: #253949;
+    --text-secondary: #4a6375;
+    --text-muted: #6b8597;
   }
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #0B132B;
-    color: #F8FAFC;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f6fafc;
+    color: #253949;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Custom scrollbars for data tables and panels */
+/* Custom scrollbars tuned to new palette */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.6);
+  background: #f6fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
+  background: #c3e4f3;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.5);
+  background: #91cfec;
 }
 
 .tabular-nums {
