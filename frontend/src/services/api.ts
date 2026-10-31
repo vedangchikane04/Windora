@@ -7,7 +7,16 @@ import {
   MatchingMode
 } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+function getApiBase(): string {
+  const envUrl = (import.meta.env.VITE_API_BASE_URL || '').trim();
+  if (!envUrl) return '';
+  if (envUrl.startsWith('http://') || envUrl.startsWith('https://')) {
+    return envUrl.replace(/\/+$/, '');
+  }
+  return `https://${envUrl.replace(/\/+$/, '')}`;
+}
+
+const API_BASE = getApiBase();
 
 async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url);

@@ -1,4 +1,5 @@
 services:
+  # Backend API
   - type: web
     name: windora-backend
     env: python
@@ -16,10 +17,10 @@ services:
       - key: DEFAULT_MATCHING_MODE
         value: hour_block
 
+  # Frontend Static Site
   - type: web
     name: windora-frontend
     env: static
-    region: frankfurt
     plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
